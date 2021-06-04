@@ -1,13 +1,16 @@
 <template>
-    <div>
-        test1
+    <div id="main">
+        main
     </div>
 </template>
+
 <script>
 export default {
+  name: "Main",
     
 }
 </script>
-<style scoped>
 
+<style lang="scss" scoped>
+    
 </style>

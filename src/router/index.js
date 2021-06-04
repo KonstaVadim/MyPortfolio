@@ -4,15 +4,31 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+  
   {
-    path: '/test1',
-    name: 'test1',
-    component: () => import('../components/test1.vue')
+    path: '/',
+    name: 'main',
+    component: () => import('../components/content/Main.vue')
   },
   {
-    path: '/test2',
-    name: 'test2',
-    component: () => import('../components/test2.vue')
+    path: '/about-me',
+    name: 'aboutMe',
+    component: () => import('../components/content/AboutMe.vue')
+  },
+  {
+    path: '/portfolio',
+    name: 'portfolio',
+    component: () => import('../components/content/Portfolio.vue')
+  },
+  {
+    path: '/services',
+    name: 'services',
+    component: () => import('../components/content/Services.vue')
+  },
+  {
+    path: '/contacts',
+    name: 'contacts',
+    component: () => import('../components/content/Contacts.vue')
   }
 ]
 

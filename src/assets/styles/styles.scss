@@ -1,0 +1,10 @@
+@use './theme-colors.scss';
+
+/* Colors */
+.primary-text-color {
+    color: var(--primary-text-color);
+}
+
+.secondary-text-color {
+    color: var(--secondary-text-color);
+}
