@@ -43,24 +43,30 @@ export default {
 <style lang="scss">
 @use "./assets/styles/styles.scss";
 
-* {
-  padding: 0;
-  margin: 0;
-  line-height: 1.3;
+@mixin decorative-line {
+    width: 1px;
+    background-color: rgba(255, 255, 255, .8);
+    position: absolute;
+    z-index: -1;
+    content: '';
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+#app {
+  width: 100%;
+  height: 100%;
 
-body {
-  height: 100vh;
-  width: 100vw;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #a1a1a1;
+  &:before {
+    @include decorative-line;
+    bottom: 0;
+    left: 7%;
+    height: 13%;
+  }
+
+  &:after {
+    @include decorative-line;
+    top: 0;
+    right: 7%;
+    height: 90%;
+  }
 }
 </style>
