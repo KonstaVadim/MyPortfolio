@@ -1,8 +1,8 @@
 <template>
-  <div class="header" ref="header">
+  <div class="header" :class="{ 'adaptive-menu': isActive }">
     <div class="header__logo">
       <span class="header__initials">KV</span>
-      <div class="header__humburger" @click="showMenu()">KV</div>
+      <div class="header__humburger" @click="isActive = !isActive">KV</div>
     </div>
     <div class="header-nav">
       <router-link
@@ -22,7 +22,9 @@
 export default {
   name: "Header",
   data() {
-    return {};
+    return {
+      isActive: false,
+    };
   },
   computed: {
     // Список ссылок
@@ -31,18 +33,14 @@ export default {
         return this.$store.getters.NAVLINKS;
       },
     },
-  },
-  methods: {
-    showMenu() {
-      console.log();
-      this.$refs.header.classList.add("adaptive-menu");
-    },
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @use '../../assets/styles/theme-colors.scss';
+
+$speed: 0.5s;
 
 %flex-between-bottom {
   display: flex;
@@ -52,10 +50,13 @@ export default {
 
 .header {
   @extend %flex-between-bottom;
-  height: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   padding: 0 10%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  text-shadow: 1px 1px 2px rgb(0, 0, 0); // TODO обдумать нужен ли на ссылках
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color $speed ease-in-out;
 
   &__logo {
     font-size: 2rem;
@@ -72,15 +73,18 @@ export default {
 
   &-nav {
     @extend %flex-between-bottom;
+    height: 50px;
+    transition: height $speed ease-in-out;
     width: 80%;
 
     &__link {
+      cursor: default;
       text-decoration: none;
+      transition: color .3s ease-in-out, font-size .3s ease-in-out;
     }
 
-    &__link:not(.active-text) {
+    &__link:not(.router-link-active) {
       cursor: pointer;
-      transition: all 0.3s ease-in-out;
 
       &:hover {
         color: var(--primary-text-color);
@@ -96,26 +100,27 @@ export default {
 
 @media (max-width: 1024px) {
   .adaptive-menu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 3;
     background-color: var(--bacground-color);
 
     .header__humburger {
-      background-color: var(--secondary-text-color);;
+      background-color: var(--secondary-text-color);
     }
 
     .header-nav {
       height: 150px;
-      transition: height 1s ease-in-out;
 
       &__link {
-        transition: opacity 1s ease-in-out;
         opacity: 1;
-        width: 100%;
       }
     }
   }
 
   .header {
-    height: unset;
     justify-content: unset;
     align-items: center;
 
@@ -126,10 +131,8 @@ export default {
     &__humburger {
       display: block;
       padding: 0 5px;
-      margin-bottom: 5px;
       border: 1px solid var(--secondary-text-color);
       border-radius: 15%/50%;
-      text-shadow: none;
       font-size: 1.8rem;
       cursor: pointer;
 
@@ -139,11 +142,10 @@ export default {
     }
 
     &-nav {
+      flex-direction: column;
+      align-items: flex-start;
       margin-left: 20px;
       padding: 10px 0;
-      flex-direction: column;
-      align-items: unset;
-      height: 50px;
       overflow: hidden;
 
       &__link {
@@ -152,4 +154,5 @@ export default {
     }
   }
 }
+
 </style>

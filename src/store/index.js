@@ -26,10 +26,25 @@ export default new Vuex.Store({
                 name: 'КОНТАКТЫ',
                 url: 'contacts'
             }
-        }                                // Список ссылок
+        },                                // Список ссылок
+        socialsLink: {
+            0: {
+                name: 'VK',
+                url: 'vk.png'
+            },
+            1: {
+                name: 'INSTAGRAM',
+                url: 'facebook.png'
+            },
+            2: {
+                name: 'FACEBOOK',
+                url: 'instagram.png'
+            },
+        },                                // Список ссылок
     },
     getters: {
         NAVLINKS: state => state.navLinks,  // Список ссылок
+        SOCIALSLINK: state => state.socialsLink,  // Список ссылок
     },
     mutations: {
         

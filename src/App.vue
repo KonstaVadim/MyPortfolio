@@ -1,17 +1,24 @@
 <template>
   <div id="app" class="primary-text-color">
     <header>
-      <Header/>
+      <Header />
     </header>
+
     <main>
-    <router-view/>
+      <transition name="component-fade" mode="out-in">
+        <router-view />
+      </transition>
     </main>
-    <footer></footer>
+
+    <footer>
+      <Footer />
+    </footer>
   </div>
 </template>
 
 <script>
-import Header from './components/header/Header';
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
 
 // TODO сделать кнопку с рандомными пожеланиями/предсказаниями по API
 export default {
@@ -22,10 +29,12 @@ export default {
     };
   },
   components: {
-    Header
+    Header,
+    Footer,
   },
   computed: {},
   methods: {
+    /* Смена темы */
     changeTheme() {
       let htmlElement = document.documentElement;
       if (this.themeMode) {
@@ -44,16 +53,21 @@ export default {
 @use "./assets/styles/styles.scss";
 
 @mixin decorative-line {
-    width: 1px;
-    background-color: rgba(255, 255, 255, .8);
-    position: absolute;
-    z-index: -1;
-    content: '';
+  width: 1px;
+  background-color: var(--border-color);
+  position: absolute;
+  z-index: 1;
+  content: "";
 }
 
 #app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  min-width: 320px;
   height: 100%;
+  padding-top: 51px;
 
   &:before {
     @include decorative-line;
@@ -68,5 +82,20 @@ export default {
     right: 7%;
     height: 90%;
   }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}
+
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.component-fade-enter,
+.component-fade-leave-to {
+  opacity: 0;
 }
 </style>
