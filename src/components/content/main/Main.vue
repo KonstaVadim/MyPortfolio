@@ -30,7 +30,7 @@
         <!-- Main для панели -->
         <template v-slot:panelMain>
           <div class="panel-main-container">
-            <img :src="require('@/assets/images/space.jpg')" alt="">
+            <img :src="require('@/assets/images/space.jpg')" alt="Space" />
           </div>
         </template>
       </panel>
@@ -47,6 +47,29 @@ export default {
   components: {
     sideText,
     panel,
+  },
+  data() {
+    return {
+      imgURL: "",
+    };
+  },
+  computed: {},
+  created() {
+    //var xhr = new XMLHttpRequest();
+    //xhr.onload = () => {
+    //  var reader = new FileReader();
+    //  reader.onloadend = () => {
+    //    this.imgURL = reader.result;
+    //    console.log(reader.result);
+    //  };
+    //  reader.readAsDataURL(xhr.response);
+    //};
+    //xhr.open(
+    //  "GET",
+    //  document.location.origin + require("@/assets/images/space.jpg")
+    //);
+    //xhr.responseType = "blob";
+    //xhr.send();
   },
 };
 </script>
