@@ -5,32 +5,31 @@
     <div class="content">
       <panel :isBackgroundActive="false">
         <!-- Header для панели -->
-        <template v-slot:panelHeader>
-          <div class="panel-header-container">
-            <!-- Левая часть -->
-            <div class="panel-header-container__full-name">
-              <div>Konstantinov</div>
-              <div>Vadim</div>
-              <div>Valerievich</div>
-            </div>
-            <!-- Правая часть -->
-            <div class="panel-header-container__contacts">
-              <div>Konstavadim@gmail.com</div>
+        <template v-slot:panelMain>
+          <div class="content__container">
+            <div class="text">
+              <span>Привет!</span>
               <div>
-                <img
-                  class="icon-call"
-                  :src="require('@/assets/images/call.png')"
-                  alt="Call"
-                />+7 996 332 70 71
+                Меня зовут <span class="text__name">Константинов Вадим</span>
+              </div>
+              <div>
+                <router-link class="router-link" to="/" exact-path>
+                  Здесь
+                </router-link>
+                <span>вы можете найти всю необходимую обо мне информацию</span>
+              </div>
+              <div class="text__chat">
+                <span>Буду рад ответить на все вопросы</span>
+                <router-link :to="contactsLink.url" exact-path>
+                  <box-icon
+                    class="text__contact-icon"
+                    name="chat"
+                    animation="tada"
+                    color="white"
+                  ></box-icon>
+                </router-link>
               </div>
             </div>
-          </div>
-        </template>
-
-        <!-- Main для панели -->
-        <template v-slot:panelMain>
-          <div class="panel-main-container">
-            <img :src="require('@/assets/images/space.jpg')" alt="Space" />
           </div>
         </template>
       </panel>
@@ -48,33 +47,24 @@ export default {
     sideText,
     panel,
   },
-  data() {
-    return {
-      imgURL: "",
-    };
-  },
-  computed: {},
-  created() {
-    //var xhr = new XMLHttpRequest();
-    //xhr.onload = () => {
-    //  var reader = new FileReader();
-    //  reader.onloadend = () => {
-    //    this.imgURL = reader.result;
-    //    console.log(reader.result);
-    //  };
-    //  reader.readAsDataURL(xhr.response);
-    //};
-    //xhr.open(
-    //  "GET",
-    //  document.location.origin + require("@/assets/images/space.jpg")
-    //);
-    //xhr.responseType = "blob";
-    //xhr.send();
+  computed: {
+    // Ссылка на модуль "Контакты"
+    contactsLink: {
+      get() {
+        return this.$store.getters.NAVLINKS.contacts;
+      },
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #main {
   display: flex;
   align-items: center;
@@ -89,6 +79,35 @@ export default {
   margin-left: 5%;
   padding-right: 7%;
   background-color: var(--panel__main-block);
+
+  &__container {
+    @include flex-center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    font-family: 'Old Standard TT', serif;
+
+    &__chat {
+      @include flex-center;
+    }
+
+    &__contact-icon {
+      cursor: pointer;
+      margin-left: 5px;
+    }
+  }
+
+  .router-link {
+    color: inherit;
+    text-decoration: none;
+    font-style: italic;
+  }
 }
 
 .panel-header-container {
@@ -117,15 +136,6 @@ export default {
   }
 }
 
-.panel-main-container {
-  height: 100%;
-
-  img {
-    height: 100%;
-    width: 100%;
-  }
-}
-
 @media (max-width: 768px) {
   #main {
     flex-direction: column;
@@ -136,32 +146,9 @@ export default {
     padding: 0;
     margin: 0;
     z-index: 2;
-  }
 
-  .panel-header-container {
-    &__full-name * {
-      font-size: 1.1rem;
-    }
-    &__contacts * {
+    .text {
       font-size: 1rem;
-    }
-  }
-}
-
-@media (max-width: 400px) {
-  .panel-header-container {
-    &__full-name * {
-      font-size: 0.9rem;
-    }
-    &__contacts * {
-      font-size: 0.9rem;
-    }
-
-    .icon-call {
-      width: 18px;
-      height: 18px;
-      vertical-align: middle;
-      margin-right: 5px;
     }
   }
 }

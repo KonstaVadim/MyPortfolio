@@ -1,14 +1,14 @@
 <template>
   <div class="header" :class="{ 'adaptive-menu': isActive }">
     <div class="header__logo">
-      <span class="header__initials">KV</span>
+      <span class="header__initials">КВ</span>
       <div class="header__humburger" @click="isActive = !isActive">KV</div>
     </div>
     <div class="header-nav">
       <router-link
         class="header-nav__link secondary-text-color"
         v-for="link in navLinks"
-        :to="`/${link.url}`"
+        :to="link.url"
         :key="link.name"
         exact-path
       >
@@ -105,7 +105,7 @@ $speed: 0.5s;
     top: 0;
     width: 100%;
     z-index: 3;
-    background-color: var(--bacground-color);
+    background-color: var(--background-color);
 
     .header__humburger {
       background-color: var(--secondary-text-color);

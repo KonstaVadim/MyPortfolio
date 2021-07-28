@@ -1,19 +1,16 @@
 <template>
   <div class="footer">
-    <div class="footer__name">
-      <span>KONSTANTINOV VADIM</span>
-    </div>
-    <div class="footer__container">
-      <div class="footer__socials">
-        <a href="#" v-for="link in socialsLink" :key="link.name">
-          <img :src="require(`@/assets/images/${link.url}`)" :alt="link.name" />
-        </a>
-      </div>
+    <div class="footer__socials">
+      <a :href="link.url" target="_blank" v-for="link in socialsLink" :key="link.name">
+        <box-icon type="logo" :name="link.name" animation="burst-hover" color="white"></box-icon>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
+import 'boxicons';
+
 export default {
   name: "Footer",
   computed: {
@@ -34,40 +31,20 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: rgba(43, 39, 45, 0.6);
+  background-color: rgba(0, 0, 0, 0.25);
   text-align: center;
-
-  &__name {
-    font-size: 2rem;
-  }
-
-  &__container {
-    width: 100%;
-    border-top: 1px solid var(--primary-text-color);
-    border-bottom: 1px solid var(--border-color);
-  }
 
   &__socials {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 50px;
+    width: 100%;
+    border-bottom: 1px solid var(--border-color);
 
-    img {
-      height: 32px;
-      width: 32px;
-    }
 
     a:not(:first-child) {
       margin-left: 15px;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .footer {
-    .name {
-      font-size: 1.5rem;
     }
   }
 }

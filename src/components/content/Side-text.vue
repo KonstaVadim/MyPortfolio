@@ -23,7 +23,7 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: bold;
   white-space: nowrap;
   writing-mode: vertical-lr;

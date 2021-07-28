@@ -6,41 +6,45 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         navLinks: {
-            0: {
+            'main': {
                 name: 'ГЛАВНАЯ СТРАНИЦА',
-                url: ''
+                url: '/'
             },
-            1: {
+            'about': {
                 name: 'ОБО МНЕ',
-                url: 'about-me'
+                url: '/about-me'
             },
-            2: {
+            'portfolio': {
                 name: 'ПОРТФОЛИО',
-                url: 'portfolio'
+                url: '/portfolio'
             },
-            3: {
+            'yclygi': {
                 name: 'УСЛУГИ',
-                url: 'services'
+                url: '/services'
             },
-            4: {
+            'contacts': {
                 name: 'КОНТАКТЫ',
-                url: 'contacts'
+                url: '/contacts'
             }
         },                                // Список ссылок
-        socialsLink: {
-            0: {
-                name: 'VK',
-                url: 'vk.png'
+        socialsLink: [
+            {
+                name: 'vk',
+                url: 'https://vk.com/c0nsta'
             },
-            1: {
-                name: 'INSTAGRAM',
-                url: 'facebook.png'
+            {
+                name: 'instagram',
+                url: 'https://www.instagram.com/consta_v2.0'
             },
-            2: {
-                name: 'FACEBOOK',
-                url: 'instagram.png'
+            {
+                name: 'telegram',
+                url: 'https://t.me/consta_v'
             },
-        },                                // Список ссылок
+            {
+                name: 'whatsapp',
+                url: 'https://wa.me/79963327071'
+            },
+        ],                                // Список ссылок
     },
     getters: {
         NAVLINKS: state => state.navLinks,  // Список ссылок

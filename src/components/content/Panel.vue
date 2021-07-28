@@ -2,16 +2,8 @@
   <div class="panel" :class="panelClasses">
     <div class="panel__small-block"></div>
 
-    <div class="panel__content">
-      <!-- Header -->
-      <div class="panel__header">
-        <slot name="panelHeader"></slot>
-      </div>
-
-      <!-- Main -->
-      <div class="panel__main">
-        <slot name="panelMain"></slot>
-      </div>
+    <div class="panel__big-block">
+      <slot name="panelMain"></slot>
     </div>
   </div>
 </template>
@@ -49,7 +41,7 @@ export default {
     background-color: var(--panel__small-block);
   }
 
-  &__content {
+  &__big-block {
     display: flex;
     flex-direction: column;
     width: 100%;
