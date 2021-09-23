@@ -3,8 +3,7 @@
     <side-text :text="'ГЛАВНАЯ СТРАНИЦА'" :rotate="180" />
 
     <div class="content">
-      <panel :isBackgroundActive="false">
-        <!-- Header для панели -->
+      <panel :isBackgroundActive="false" :positionSmallBlock="'left'">
         <template v-slot:panelMain>
           <div class="content__container">
             <div class="text">
@@ -74,7 +73,7 @@ export default {
 
 .content {
   position: relative;
-  width: 95%;
+  width: 100%;
   height: 85%;
   margin-left: 5%;
   padding-right: 7%;
@@ -91,7 +90,7 @@ export default {
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
-    font-family: 'Old Standard TT', serif;
+    font-family: "Old Standard TT", serif;
 
     &__chat {
       @include flex-center;

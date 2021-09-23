@@ -1,10 +1,12 @@
 <template>
   <div class="panel" :class="panelClasses">
-    <div class="panel__small-block"></div>
+    <div class="panel__small-block" v-if="positionSmallBlock == 'left'"></div>
 
     <div class="panel__big-block">
       <slot name="panelMain"></slot>
     </div>
+
+    <div class="panel__small-block" v-if="positionSmallBlock == 'right'"></div>
   </div>
 </template>
 
@@ -13,6 +15,7 @@ export default {
   name: "backgrounfPanel",
   props: {
     isBackgroundActive: Boolean,
+    positionSmallBlock: String,
   },
   computed: {
     // Классы панели
