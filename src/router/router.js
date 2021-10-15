@@ -11,19 +11,14 @@ const routes = [
     component: () => import('../components/content/main/Main.vue')
   },
   {
-    path: '/about-me',
-    name: 'aboutMe',
-    component: () => import('../components/content/about-me/About-me.vue')
-  },
-  {
     path: '/portfolio',
     name: 'portfolio',
     component: () => import('../components/content/portfolio/Portfolio.vue')
   },
   {
-    path: '/services',
-    name: 'services',
-    component: () => import('../components/content/services/Services.vue')
+    path: '/about-me',
+    name: 'aboutMe',
+    component: () => import('../components/content/about-me/About-me.vue')
   },
   {
     path: '/contacts',

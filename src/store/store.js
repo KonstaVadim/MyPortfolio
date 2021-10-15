@@ -10,17 +10,13 @@ export default new Vuex.Store({
                 name: 'ГЛАВНАЯ СТРАНИЦА',
                 url: '/'
             },
-            'about': {
-                name: 'ОБО МНЕ',
-                url: '/about-me'
-            },
             'portfolio': {
                 name: 'ПОРТФОЛИО',
                 url: '/portfolio'
             },
-            'yclygi': {
-                name: 'УСЛУГИ',
-                url: '/services'
+            'about': {
+                name: 'ОБО МНЕ',
+                url: '/about-me'
             },
             'contacts': {
                 name: 'КОНТАКТЫ',

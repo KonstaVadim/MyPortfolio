@@ -4,6 +4,9 @@
       <panel :isBackgroundActive="false" :positionSmallBlock="'right'">
         <template v-slot:panelMain>
           <div class="content__container">
+            <!-- Счетчик опыта работы -->
+            <div class="experience-counter">Опыт работы: {{experienceCounter}}</div>
+            
             <!-- Список работ -->
             <div class="list-jobs">
               <div
@@ -20,8 +23,15 @@
                     color="#4f4f4f"
                     :class="{ 'rotate-filter': keysDropdown.includes(key) }"
                   ></box-icon>
-                  <div class="list-jobs__name-company">
-                    {{ job.nameCompany }}
+                  <div class="list-jobs__header-info">
+                    <!-- Название компании -->
+                    <span class="list-jobs__name-company">{{
+                      job.nameCompany
+                    }}</span>
+                    <!-- Опыт работы -->
+                    <span class="list-jobs__work-experience"
+                      >С {{ job.dateStart }} по {{ job.dateEnd }}</span
+                    >
                   </div>
                 </div>
 
@@ -62,7 +72,7 @@
       </panel>
     </div>
 
-    <side-text :text="''" />
+    <side-text :text="'ПОРТФОЛИО'" />
   </div>
 </template>
 
@@ -81,52 +91,56 @@ export default {
       keysDropdown: [],
       jobs: {
         bolid: {
-          nameCompany: "ЗАО НВП Болид",
-          dataStart: "11.11.1111",
-          dataEnd: "11.11.2111",
+          nameCompany: "ЗАО НВП Болид, г. Москва",
+          dateStart: "10.2020",
+          dateEnd: "н.в.",
           informationJob: [
             {
               paragraphTitle: "Должность",
-              itemInformation: ["111111", "2222", "111133311"],
+              itemInformation: ["WEB-разработчик"],
             },
             {
-              paragraphTitle: "Обязаности",
-              itemInformation: ["4444", "5555", "6666"],
+              paragraphTitle: "Обязанности",
+              itemInformation: [
+                "Разработка web-интерфейса конфигурирования датчиков и устройств пожарной безопасности (журнал событий с виртуальным скроллом, формы с обновляемыми данными через Websocket)",
+                "Доработка back-end части (регистрация через почту, защита от bruteforce, обновление прошивки датчиков)",
+                "Рефакторинг кода и поддержание работоспособности систем",
+              ],
             },
           ],
         },
-        asd: {
-          nameCompany: "ЗАО НВП Болид",
-          dataStart: "11.11.1111",
-          dataEnd: "11.11.2111",
+        pfsz: {
+          nameCompany: 'ООО "Профсоюз", г. Кемерово',
+          dateStart: '04.201',
+          dateEnd: '04.2020',
           informationJob: [
             {
-              paragraphTitle: "Должность",
-              itemInformation: ["111111", "2222", "111133311"],
+              paragraphTitle: 'Должность',
+              itemInformation: ['Front-end разработчик'],
             },
             {
-              paragraphTitle: "Обязаности",
-              itemInformation: ["4444", "5555", "6666"],
-            },
-          ],
-        },
-        asd2: {
-          nameCompany: "ЗАО НВП Болид",
-          dataStart: "11.11.1111",
-          dataEnd: "11.11.2111",
-          informationJob: [
-            {
-              paragraphTitle: "Должность",
-              itemInformation: ["111111", "2222", "111133311"],
-            },
-            {
-              paragraphTitle: "Обязаности",
-              itemInformation: ["4444", "5555", "6666"],
+              paragraphTitle: 'Обязанности',
+              itemInformation: [
+                'Разработка новых модулей и интегрирование готовых версток ("ОТ и ПБ", "Маршруты", "Анализ показателей дублирующего контроля газов")',
+                'Рефакторинг кода и поддержание работоспособности ("Маршруты", "Анализ показателей дублирующего контроля газов")',
+                'Верстка печатных форм различных документов',
+                'Поддержание работоспособности схемы шахты (С#, Unity)',
+                ],
             },
           ],
         },
       },
     };
+  },
+  computed: {
+    // Счетчик опыта работы
+    experienceCounter() {
+      let keysJobs = Object.keys(this.jobs);
+      let startJob = this.jobs[keysJobs[keysJobs.length - 1]];
+      let endJob = this.jobs[keysJobs[0]];
+      console.log(startJob, endJob);
+      return 1
+    }
   },
   methods: {
     // Показать выпадающий список
@@ -137,6 +151,19 @@ export default {
         this.keysDropdown.push(key);
       }
     },
+    // Показать все работы
+    showAllJobs() {
+      let keys = Object.keys(this.jobs);
+      for (let i in keys) {
+        // Используем небольшую задержку для отображения работ
+        setTimeout(() => {
+          this.keysDropdown.push(keys[i]);
+        }, (+i + 1) * 200);
+      }
+    },
+  },
+  created() {
+    this.showAllJobs();
   },
 };
 </script>
@@ -153,38 +180,65 @@ export default {
   align-items: center;
   height: 100%;
   width: 100%;
+  padding-right: 7%;
 }
 
 .content {
   position: relative;
   width: 100%;
   height: 85%;
+  margin-right: 5%;
   background-color: var(--panel__main-block);
 
   &__container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     width: 100%;
     height: 100%;
     padding: 20px 40px;
-    text-align: center;
   }
+}
+
+.experience-counter {
+  text-align: right;
+  color: var(--secondary-text-color);
 }
 
 .list-jobs {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  text-align: initial;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 
   &__item-container {
+    display: flex;
+    flex-direction: column;
     margin-top: 25px;
     min-width: 50%;
   }
 
+  &__header-info {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__name-company {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+  }
+
+  &__work-experience {
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
   }
 
   &__header {
@@ -205,12 +259,17 @@ export default {
     margin-left: 30px;
   }
 
+  &__item-title {
+    font-size: 1.2rem;
+    color: var(--secondary-text-color);
+  }
+
   .btn-dropdown {
     width: 30px;
     height: 30px;
     cursor: pointer;
     margin-right: 15px;
-    border-radius: 4px;
+    border-radius: 50%;
     transition: all 0.3s ease-in-out;
     background-color: var(--primary-text-color);
 
